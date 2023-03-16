@@ -1,0 +1,6 @@
+name: CookieClicker-rewrite
+version: '${project.version}'
+main: ch.hutch79.cookieclicker.CookieClicker_rewrite
+api-version: 1.13
+authors: [Hutch79]
+website: https://hutch79.ch
