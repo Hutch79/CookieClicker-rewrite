@@ -1,7 +1,7 @@
 # CookieClicker
 ![bStats Servers](https://img.shields.io/bstats/servers/16433?style=for-the-badge)
 ![bStats Players](https://img.shields.io/bstats/players/16433?style=for-the-badge)
-![GitHub last commit](https://img.shields.io/github/last-commit/Hutch79/CookieClicker?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/Hutch79/CookieClicker-rewrite?style=for-the-badge)
 ![Spiget Download Size](https://img.shields.io/spiget/download-size/105878?style=for-the-badge)
 ![Spiget Downloads](https://img.shields.io/spiget/downloads/105878?style=for-the-badge)
 ![Spiget Rating](https://img.shields.io/spiget/rating/105878?style=for-the-badge)
