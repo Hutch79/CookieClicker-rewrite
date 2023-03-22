@@ -1,3 +1,6 @@
+# Everything in here is still in very very early dev phase. It may not even compile ^^
+
+
 # CookieClicker
 ![bStats Servers](https://img.shields.io/bstats/servers/16433?style=for-the-badge)
 ![bStats Players](https://img.shields.io/bstats/players/16433?style=for-the-badge)
