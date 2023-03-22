@@ -1,6 +1,5 @@
 package ch.hutch79.cookieclicker.listener;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 public class Listener implements org.bukkit.event.Listener {
 
-    private ArrayList<String> guis = new ArrayList<String>();
+    private final ArrayList<String> guis = new ArrayList<String>();
 
     public Listener() {
 
@@ -38,8 +37,7 @@ public class Listener implements org.bukkit.event.Listener {
         if (!guis.contains(event.getView().getTitle())) {
             return;
         }
-
-        Player player = (Player) event.getWhoClicked();
+        OnInventoryClick.execute(event);
         event.setCancelled(true);
 
 

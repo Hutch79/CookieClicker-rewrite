@@ -12,8 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CookieClicker extends JavaPlugin {
 
-
-    PluginDescriptionFile pdf = this.getDescription();
+    public final CookieClicker plugin = this;
+    PluginDescriptionFile pdf = plugin.getDescription();
 
     @Override
     public void onEnable() {
@@ -71,4 +71,9 @@ public final class CookieClicker extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5======================================================");
 
     }
+
+    public CookieClicker getPlugin(){
+        return plugin;
+    }
+
 }
