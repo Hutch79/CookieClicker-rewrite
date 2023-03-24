@@ -16,8 +16,5 @@ database:
   # Database name.
   database: "database_name"
 
-# The prefix used in all Plugin Messages
-prefix: "§5[§dCookieClicker§5] "
-
 # Select a Language from the messages.yml file
 setLanguage: "en"

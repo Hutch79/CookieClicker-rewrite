@@ -1,3 +1,6 @@
+# The prefix used in all Plugin Messages
+prefix: "§5[§dCookieClicker§5] "
+
 de:
   noPerm: "§cDu hast nicht die benötigte Berechtigung diesen Befehl auszuführen."
   noPlayer: "§cDieser Befehl kann nur von Spielern genutzt werden."
