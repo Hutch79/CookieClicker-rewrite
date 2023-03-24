@@ -24,7 +24,11 @@ public class GuiBuilder {
         guiList.addAll(guiSet);
         Bukkit.getConsoleSender().sendMessage(String.valueOf(guiList));
 
+        List<List<String>> guiItems = new ArrayList<>();
 
+        for (int i = 0; i < guiList.size(); i++){
+
+        }
 
         return guiList;
 

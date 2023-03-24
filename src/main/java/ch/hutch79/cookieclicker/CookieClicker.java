@@ -62,7 +62,6 @@ public final class CookieClicker extends JavaPlugin {
             getLogger().warning("and if you find any Bugs, please report them: https://github.com/Hutch79/CookieClicker");
         }
         guiBuilder.GuiBuilderInit();
-        Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8< §5Loaded GUI's: §7" + guiBuilder.readConfig("GUI.yml"));
 
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5======================================================");
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5| §6" + pdf.getName() + " " + pdf.getVersion() + " §bby Hutch79");
@@ -78,6 +77,8 @@ public final class CookieClicker extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5| §aPlaceholderAPI §7has been found, hooking into it now.");
             isPlaceholderApiInstalled = true;
         }
+        Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5| §dLoaded GUI's: §7" + guiBuilder.readConfig("GUI.yml"));
+
 
     }
 
