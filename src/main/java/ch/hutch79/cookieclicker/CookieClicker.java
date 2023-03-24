@@ -31,10 +31,6 @@ public final class CookieClicker extends JavaPlugin {
         configManager.getConfig("config.yml").copyDefaults(true).save();
         configManager.getConfig("messages.yml").copyDefaults(true).save();
 
-        // Config noch nicht im resources ordner
-        // getConfig().options().copyDefaults();
-        // saveDefaultConfig();
-
         new UpdateChecker(this, UpdateCheckSource.SPIGET, "" + SPIGOT_RESOURCE_ID + "")
                 .setDownloadLink("https://www.spigotmc.org/resources/105878/")
                 .setChangelogLink("https://www.spigotmc.org/resources/105878/updates")
