@@ -25,13 +25,14 @@ public final class CookieClicker extends JavaPlugin {
     private PluginDescriptionFile pdf;
     private final GuiBuilder guiBuilder = new GuiBuilder();
 
+
     private boolean isPlaceholderApiInstalled = false;
 
     @Override
     public void onEnable() {
         plugin = this;
-        pdf = plugin.getDescription();
-        configManager = new ConfigManager(plugin);
+        pdf = this.getDescription();
+        configManager = new ConfigManager(this);
 
 
         Bukkit.getPluginManager().registerEvents(new Listener(), this);
@@ -60,7 +61,7 @@ public final class CookieClicker extends JavaPlugin {
             getLogger().warning("So if you want to provide Feedback for this Version, don't hesitate to do so on GitHub");
             getLogger().warning("and if you find any Bugs, please report them: https://github.com/Hutch79/CookieClicker");
         }
-
+        guiBuilder.GuiBuilderInit();
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8< §5Loaded GUI's: §7" + guiBuilder.readConfig("GUI.yml"));
 
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5======================================================");
@@ -77,6 +78,7 @@ public final class CookieClicker extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5| §aPlaceholderAPI §7has been found, hooking into it now.");
             isPlaceholderApiInstalled = true;
         }
+
     }
 
     @Override
@@ -94,12 +96,12 @@ public final class CookieClicker extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5======================================================");
 
     }
-
-    public static CookieClicker getPlugin(){return plugin;}
+    public static CookieClicker getPlugin(){
+        return plugin;
+    }
     public ConfigManager getConfigManager(){
         return configManager;
     }
-
 
     public String replacePlaceholders(Player player, String input) {
         if(isPlaceholderApiInstalled) {

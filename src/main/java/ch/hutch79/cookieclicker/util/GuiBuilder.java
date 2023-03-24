@@ -9,8 +9,13 @@ import java.util.Set;
 
 public class GuiBuilder {
 
-    private final CookieClicker main = CookieClicker.getPlugin();
-    public final ConfigManager configManager = main.getConfigManager();
+    private CookieClicker main;
+    public ConfigManager configManager;
+
+    public void GuiBuilderInit() {
+        main = CookieClicker.getPlugin();
+        configManager = main.getConfigManager();
+    }
 
     public List<String> readConfig(String path) {
 
@@ -18,6 +23,7 @@ public class GuiBuilder {
         List<String> guiList = new ArrayList<>(guiSet.size());
         guiList.addAll(guiSet);
         Bukkit.getConsoleSender().sendMessage(String.valueOf(guiList));
+
 
 
         return guiList;
