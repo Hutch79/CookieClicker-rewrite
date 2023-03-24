@@ -1,0 +1,9 @@
+de:
+  noPerm: "§cDu hast nicht die benötigte Berechtigung diesen Befehl auszuführen."
+  noPlayer: "§cDieser Befehl kann nur von Spielern genutzt werden."
+  cmdAdd: "§7Bitte nutze /cookie add [player] [ammount]"
+
+en:
+  noPerm: "§cYou have no permission to execute this command."
+  noPlayer: "§cThis command can only be executed by players"
+  cmdAdd: "§7Pleas use /cookie add [player] [ammount]"

@@ -1,0 +1,26 @@
+database:
+  # Database Type.
+  # SQLite: A local file in your plugins folder
+  # MySQL: Needs an external database server. It's faster and more reliable than SQLite
+  type: "SQLite"
+
+  # Only needed if using MySQL
+  # Address of the Database server
+  address: "172.18.0.1"
+  # Server port. Standard is 3306
+  port: 3306
+  # Database Username
+  user: "root"
+  # Database password
+  password: "password"
+  # Database name.
+  database: "database_name"
+
+# The prefix used in all Plugin Messages
+prefix: "§5[§dCookieClicker§5] "
+
+# Select a Language.
+# You can simply add a language by copy an existing language and edit it.
+# Set a new language code and use it in setLanguage, it'll work just fine.
+# IMPORTANT: You need every message in your own translation!
+setLanguage: "en"

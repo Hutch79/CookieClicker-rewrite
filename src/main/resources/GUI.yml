@@ -1,0 +1,14 @@
+# This is the Configuration GUI for the CookieClicker GUI.
+# You can edit everything to your needing as well as redesign the complete GUI.
+
+0:
+  item: STONE
+  name: "Test 123"
+  lore: "Some lore ^^"
+  type: "placeholder"
+
+test:
+  item: GRASS
+  name: "Test 456"
+  lore: "I ame Gandalf"
+  type: "placeholder"

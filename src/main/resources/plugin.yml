@@ -1,6 +1,8 @@
-name: CookieClicker-rewrite
+name: CookieClicker
 version: '${project.version}'
-main: ch.hutch79.cookieclicker.CookieClicker_rewrite
+main: ch.hutch79.cookieclicker.CookieClicker
 api-version: 1.13
 authors: [Hutch79]
 website: https://hutch79.ch
+softdepend:
+  - PlaceholderAPI
