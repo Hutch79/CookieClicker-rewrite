@@ -2,6 +2,8 @@ package ch.hutch79.cookieclicker.util;
 
 import ch.hutch79.cookieclicker.CookieClicker;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +22,37 @@ public class GuiBuilder {
     public List<String> readConfig(String path) {
 
         Set<String> guiSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout").getKeys(false);
-        List<String> guiList = new ArrayList<>(guiSet.size());
-        guiList.addAll(guiSet);
-        Bukkit.getConsoleSender().sendMessage(String.valueOf(guiList));
+        List<String> guiIDList = new ArrayList<>(guiSet.size());
+        guiIDList.addAll(guiSet);
 
-        List<List<String>> guiItems = new ArrayList<>();
+        Player player = Bukkit.getPlayer("ea0076d8-6297-4b8b-a8ec-544409f35c27");
 
-        for (int i = 0; i < guiList.size(); i++){
+        List<Inventory> guiList = null;
+        for (int i = 0; i < guiIDList.size(); i++) {
+
+            int guiSize = configManager.getConfig("GUI.yml").get().getInt("layout." + guiIDList.get(i) + ".rowCount");
+            guiSize = guiSize * 9;
+            String guiName = configManager.getConfig("GUI.yml").get().getString("layout." + guiIDList.get(i) + ".name");
+            guiList = new ArrayList<>(guiSet.size());
+            guiList.add(Bukkit.createInventory(player, guiSize, guiName));
+
+            Set<String> itemSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout." + guiIDList.get(i) + ".slots").getKeys(false);
+            List<String> itemList = new ArrayList<>(itemSet.size());
+            itemList.addAll(itemSet);
+//            Bukkit.getConsoleSender().sendMessage(String.valueOf(itemList));
+
+            for (int j = 0; j < itemList.size(); j++) {
+                itemSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout." + guiIDList.get(i) + ".slots." + itemList.get(j)).getKeys(true);
+                List<String> itemList2 = new ArrayList<>(itemSet.size());
+                itemList2.addAll(itemSet);
+                Bukkit.getConsoleSender().sendMessage(String.valueOf(itemList2));
+
+            }
 
         }
-
-        return guiList;
-
+        guiList.get(0).getContents();
+        player.openInventory(guiList.get(0));
+        return guiIDList;
     }
 
 }
