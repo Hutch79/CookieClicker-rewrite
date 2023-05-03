@@ -1,22 +1,20 @@
 package ch.hutch79.cookieclicker;
 
+import ch.hutch79.cookieclicker.commands.TabComplete;
 import ch.hutch79.cookieclicker.listener.Listener;
 import ch.hutch79.cookieclicker.util.ConfigManager;
 import ch.hutch79.cookieclicker.util.DatabaseManager;
-import ch.hutch79.cookieclicker.util.GuiBuilder;
+import ch.hutch79.cookieclicker.gui.GuiBuilder;
+import ch.hutch79.cookieclicker.commands.CommandManager;
 import com.jeff_media.updatechecker.UpdateCheckSource;
 import com.jeff_media.updatechecker.UpdateChecker;
 import com.jeff_media.updatechecker.UserAgentBuilder;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 public final class CookieClicker extends JavaPlugin {
 
@@ -36,6 +34,8 @@ public final class CookieClicker extends JavaPlugin {
 
 
         Bukkit.getPluginManager().registerEvents(new Listener(), this);
+        Objects.requireNonNull(getCommand("cookieclicker")).setExecutor(new CommandManager());
+        getCommand("cookieclicker").setTabCompleter(new TabComplete());
 
         final int SPIGOT_RESOURCE_ID = 105878; // Update checker
         Metrics metrics = new Metrics(this, 16433); // bStats

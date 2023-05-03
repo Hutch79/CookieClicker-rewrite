@@ -1,4 +1,5 @@
 name: CookieClicker
+description: 'This is a little CookieClicker Plugin with Upgrades'
 version: '${project.version}'
 main: ch.hutch79.cookieclicker.CookieClicker
 api-version: 1.13
@@ -6,3 +7,8 @@ authors: [Hutch79]
 website: https://hutch79.ch
 softdepend:
   - PlaceholderAPI
+commands:
+  cookieclicker:
+    description: Opens the CookieClicker GUI
+    aliases: cookie
+    permission: cookieclicker.use

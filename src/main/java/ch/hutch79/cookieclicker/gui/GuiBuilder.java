@@ -1,27 +1,27 @@
-package ch.hutch79.cookieclicker.util;
+package ch.hutch79.cookieclicker.gui;
 
 import ch.hutch79.cookieclicker.CookieClicker;
-import org.apache.commons.lang.ArrayUtils;
+import ch.hutch79.cookieclicker.util.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class GuiBuilder {
 
     private CookieClicker main;
     public ConfigManager configManager;
 
-    private List<List<ItemStack[]>> GUIs = new ArrayList<>();
+    private HashMap<Player, Inventory> playerGuis = new HashMap<>();
+    private HashMap<String, StoreGui> GUIs = new HashMap<>();
 
     public void GuiBuilderInit() {
         main = CookieClicker.getPlugin();
         configManager = main.getConfigManager();
+//        readConfig("GUI.yml");
     }
 
     public List<String> readConfig(String path) {
@@ -31,8 +31,8 @@ public class GuiBuilder {
         guiIDList.addAll(guiSet);
 
         List<Inventory> guiList = null;
-        ItemStack[] itemStack = new ItemStack[0];
-        for (int i = 0; i < guiIDList.size(); i++) {
+
+        for (int i = 0; i < guiIDList.size(); i++) { // Going through all GUIs
 
             int guiSize = configManager.getConfig("GUI.yml").get().getInt("layout." + guiIDList.get(i) + ".rowCount");
             guiSize = guiSize * 9;
@@ -42,16 +42,17 @@ public class GuiBuilder {
             Set<String> itemSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout." + guiIDList.get(i) + ".slots").getKeys(false);
             List<String> itemList = new ArrayList<>(itemSet.size());
             itemList.addAll(itemSet);
-//            Bukkit.getConsoleSender().sendMessage(String.valueOf(itemList));
 
-            for (int j = 0; j < itemList.size(); j++) {
+            ItemStack[] itemStack = new ItemStack[guiSize];
+
+            for (int j = 0; j < itemList.size(); j++) { // Going through all configured Items
+
                 itemSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout." + guiIDList.get(i) + ".slots." + itemList.get(j)).getKeys(true);
                 List<String> itemList2 = new ArrayList<>(itemSet.size());
                 itemList2.addAll(itemSet);
                 Bukkit.getConsoleSender().sendMessage(String.valueOf(itemList2));
 
 
-                itemStack = new ItemStack[36];
 
                 ItemStack test = new ItemStack(Material.STONE);
 
@@ -63,19 +64,32 @@ public class GuiBuilder {
 
                 //}
 
-                // GUIs.get(0).add(itemStack);
 
             }
-
+            Bukkit.getConsoleSender().sendMessage("Locked and Loaded");
+            GUIs.put(guiIDList.get(i), new StoreGui(guiIDList.get(i), guiSize, itemStack));
+            Bukkit.getConsoleSender().sendMessage(String.valueOf(GUIs));
         }
-        // guiList.get(0).getContents();
 
-        Player player = Bukkit.getPlayer("Hutch79");
-        Inventory inv = Bukkit.createInventory(player, 36);
-        inv.setContents(itemStack);
 
-        player.openInventory(inv);
         return guiIDList;
     }
 
+    public void openGUI(Player player, String gui) {
+        Bukkit.getConsoleSender().sendMessage(String.valueOf(GUIs));
+        if (playerGuis.containsKey(player)) {
+            player.sendMessage("if");
+            player.sendMessage("playerGuis.get(player)");
+            player.openInventory(playerGuis.get(player));
+        }
+        else {
+            player.sendMessage("else");
+
+            Inventory inv = Bukkit.createInventory(player, GUIs.get("main").getSize());
+            inv.setContents(GUIs.get(gui).getItems());
+            playerGuis.put(player, inv);
+
+            player.openInventory(inv);
+        }
+    }
 }
