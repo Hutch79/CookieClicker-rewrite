@@ -1,5 +1,13 @@
-# Everything in here is still in very very early dev phase. It may not even compile ^^
+# In Developement
+This repo is still in development. Feedback is surely welcomed!  
 
+## Finished stuff
+* Config Manager - Thanks to Bimmer for his [code on SpigotMC](https://www.spigotmc.org/threads/lib-file-manager-easy-config-manager.38152/).
+
+## Stuff To-Do
+* GUI Builder. The gole is to provide a YML file which contains everything important to create the GUI. This allows the User to easily modify the GUI to their needs.
+* Commands
+* Other Cookie Clickery stuff
 
 # CookieClicker
 ![bStats Servers](https://img.shields.io/bstats/servers/16433?style=for-the-badge)
