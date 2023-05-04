@@ -1,32 +1,35 @@
 package ch.hutch79.cookieclicker.gui;
 
-import ch.hutch79.cookieclicker.CookieClicker;
-import ch.hutch79.cookieclicker.util.ConfigManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 
 public class GuiBuilder {
 
-    private CookieClicker main;
-    public ConfigManager configManager;
+    private JavaPlugin main;
 
     private static HashMap<Player, Inventory> playerGuis = new HashMap<>();
     private static HashMap<String, StoreGui> GUIs = new HashMap<>();
 
-    public void GuiBuilderInit() {
-        main = CookieClicker.getPlugin();
-        configManager = main.getConfigManager();
+    public void GuiBuilderInit(JavaPlugin mainClass) {
+        main = mainClass;
+
 //        readConfig("GUI.yml");
     }
 
-    public List<String> readConfig(String path) {
+    private GuiConfigManager configManager = main.getGuiConfigManager();
 
-        Set<String> guiSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout").getKeys(false);
+    public void readConfig(String path) {
+
+        Set<String> guiSet = configManager.getCustomConfig("GUI.yml").getKeys(true);
+        Bukkit.getConsoleSender().sendMessage("GuiBuilder!!!!!");
+        Bukkit.getConsoleSender().sendMessage(String.valueOf(guiSet));
+        return;
+        /*
+                // configManager.getConfig("GUI.yml").get().getConfigurationSection("layout").getKeys(false);
         List<String> guiIDList = new ArrayList<>(guiSet.size());
         guiIDList.addAll(guiSet);
 
@@ -66,9 +69,7 @@ public class GuiBuilder {
 
 
             }
-            Bukkit.getConsoleSender().sendMessage("Locked and Loaded");
             GUIs.put(guiIDList.get(i), new StoreGui(guiIDList.get(i), guiSize, itemStack));
-            Bukkit.getConsoleSender().sendMessage(String.valueOf(GUIs));
         }
 
 
@@ -76,20 +77,18 @@ public class GuiBuilder {
     }
 
     public void openGUI(Player player, String gui) {
-        Bukkit.getConsoleSender().sendMessage(String.valueOf(GUIs));
         if (playerGuis.containsKey(player)) {
             player.sendMessage("if");
             player.sendMessage("playerGuis.get(player)");
             player.openInventory(playerGuis.get(player));
         }
         else {
-            player.sendMessage("else");
 
             Inventory inv = Bukkit.createInventory(player, GUIs.get("main").getSize());
             inv.setContents(GUIs.get(gui).getItems());
             playerGuis.put(player, inv);
 
             player.openInventory(inv);
-        }
+        }*/
     }
 }
