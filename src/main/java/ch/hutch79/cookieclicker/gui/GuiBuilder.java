@@ -15,8 +15,8 @@ public class GuiBuilder {
     private CookieClicker main;
     public ConfigManager configManager;
 
-    private HashMap<Player, Inventory> playerGuis = new HashMap<>();
-    private HashMap<String, StoreGui> GUIs = new HashMap<>();
+    private static HashMap<Player, Inventory> playerGuis = new HashMap<>();
+    private static HashMap<String, StoreGui> GUIs = new HashMap<>();
 
     public void GuiBuilderInit() {
         main = CookieClicker.getPlugin();
