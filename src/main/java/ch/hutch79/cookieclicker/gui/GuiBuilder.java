@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -46,7 +47,6 @@ public class GuiBuilder {
             int guiSize = guiConfig.getInt("layout." + guiIDList.get(i) + ".rowCount");
             guiSize = guiSize * 9;
             String guiName = guiConfig.getString("layout." + guiIDList.get(i) + ".name");
-            guiList = new ArrayList<>(guiSet.size());
 
             Set<String> itemSet = guiConfig.getConfigurationSection("layout." + guiIDList.get(i) + ".slots").getKeys(false);
             List<String> itemList = new ArrayList<>(itemSet.size());
@@ -59,23 +59,33 @@ public class GuiBuilder {
                 itemSet = guiConfig.getConfigurationSection("layout." + guiIDList.get(i) + ".slots." + itemList.get(j)).getKeys(true);
                 List<String> itemList2 = new ArrayList<>(itemSet.size());
                 itemList2.addAll(itemSet);
+                Bukkit.getConsoleSender().sendMessage("Hololulu");
                 Bukkit.getConsoleSender().sendMessage(String.valueOf(itemList2));
 
 
 
-                ItemStack test = new ItemStack(Material.STONE);
+                ItemStack item = new ItemStack(Material.STONE);
+                ItemMeta itemMeta = item.getItemMeta();
 
-                itemStack[1] = test;
-                itemStack[1].setType(Material.GRASS);
+                for (String s : itemList2) {
+
+                    Bukkit.getConsoleSender().sendMessage(s);
+                    Bukkit.getConsoleSender().sendMessage(guiConfig.getString("layout." + guiIDList.get(i) + ".slots." + itemList.get(j) + "." + s));
 
 
-                //for (int y = 0; y < itemList2.size(); y++) {
 
-                //}
+                    if (Objects.equals(s, "item")) {item.setType(Material.valueOf(guiConfig.getString("layout." + guiIDList.get(i) + ".slots." + itemList.get(j) + "." + s)));}
+                    if (Objects.equals(s, "name")) {itemMeta.setDisplayName(guiConfig.getString("layout." + guiIDList.get(i) + ".slots." + itemList.get(j) + "." + s));}
+
+
+                }
+
+                item.setItemMeta(itemMeta);
+                itemStack[Integer.parseInt(itemList.get(j))] = item;
 
 
             }
-            GUIs.put(guiIDList.get(i), new StoreGui(guiIDList.get(i), guiSize, itemStack));
+            GUIs.put(guiIDList.get(i), new StoreGui(guiName, guiSize, itemStack));
         }
 
 
@@ -90,7 +100,7 @@ public class GuiBuilder {
         }
         else {
 
-            Inventory inv = Bukkit.createInventory(player, GUIs.get("main").getSize());
+            Inventory inv = Bukkit.createInventory(player, GUIs.get("main").getSize(), GUIs.get("main").getName());
             inv.setContents(GUIs.get(gui).getItems());
             playerGuis.put(player, inv);
 
