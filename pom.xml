@@ -6,7 +6,7 @@
 
     <groupId>ch.hutch79</groupId>
     <artifactId>CookieClicker</artifactId>
-    <version>0.1-Beta</version>
+    <version>0.5-Beta</version>
     <packaging>jar</packaging>
 
     <name>CookieClicker</name>
@@ -45,6 +45,11 @@
                             <!-- Replace this with your package! -->
                             <shadedPattern>ch.hutch79</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>ch.hutch79.GuiBuilder</pattern>
+                            <!-- Replace this with your package! -->
+                            <shadedPattern>ch.hutch79.gui</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
@@ -70,12 +75,12 @@
 
     <repositories>
         <repository>
-            <id>papermc-repo</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
+            <id>Hutch79-releases</id>
+            <url>https://repo.hutch79.ch/releases</url>
         </repository>
         <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <id>papermc-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
             <id>jeff-media-public</id>
@@ -112,5 +117,11 @@
             <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>ch.hutch79</groupId>
+            <artifactId>GuiBuilder</artifactId>
+            <version>1.0-Beta</version>
+        </dependency>
+
     </dependencies>
 </project>

@@ -1,6 +1,6 @@
 package ch.hutch79.cookieclicker.commands;
 
-import ch.hutch79.cookieclicker.gui.GuiBuilder;
+import ch.hutch79.guibuilder.GuiBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,7 +14,6 @@ public class Root {
 
         sender.sendMessage("Huiii");
         guiBuilder.openGUI(player, "main");
-
 
     }
 }
