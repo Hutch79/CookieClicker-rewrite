@@ -13,7 +13,7 @@ public class Root {
         Player player = (Player) sender;
 
         sender.sendMessage("Huiii");
-        //guiBuilder.openGUI(player, "main");
+        guiBuilder.openGUI(player, "main");
 
 
     }

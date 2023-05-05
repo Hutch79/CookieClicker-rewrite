@@ -1,6 +1,5 @@
 package ch.hutch79.cookieclicker.gui;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,26 +17,22 @@ public class GuiConfigManager{
 
     private static HashMap<String, FileConfiguration> configs = new HashMap<String, FileConfiguration>();
 
-    public FileConfiguration getCustomConfig(String name) {
-        Bukkit.getConsoleSender().sendMessage("I was here");
+    public FileConfiguration getConfig(String name) {
         return configs.get(name);
     }
 
-    public void createCustomConfig(String name) {
-        Bukkit.getConsoleSender().sendMessage("Me To");
+    public void createConfig(String name, Boolean replace) {
         File customConfigFile = new File(mainClass.getDataFolder(), name);
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
-            mainClass.saveResource(name, true);
+            mainClass.saveResource(name, replace);
         }
-                Bukkit.getConsoleSender().sendMessage("Me To");
 
-        customConfig = new YamlConfiguration();
+        // YamlConfiguration customConfig = new YamlConfiguration();
 
-        YamlConfiguration.loadConfiguration(customConfigFile);
+        YamlConfiguration customConfig = YamlConfiguration.loadConfiguration(customConfigFile);
 
         configs.put(name, customConfig);
-        Bukkit.getConsoleSender().sendMessage("Me To");
 
     }
 }

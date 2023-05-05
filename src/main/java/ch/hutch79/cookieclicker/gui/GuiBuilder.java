@@ -1,35 +1,41 @@
 package ch.hutch79.cookieclicker.gui;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 
 public class GuiBuilder {
 
-    private JavaPlugin main;
+    private static JavaPlugin main;
 
     private static HashMap<Player, Inventory> playerGuis = new HashMap<>();
     private static HashMap<String, StoreGui> GUIs = new HashMap<>();
+    private GuiConfigManager configManager;
 
     public void GuiBuilderInit(JavaPlugin mainClass) {
         main = mainClass;
-
-//        readConfig("GUI.yml");
+        configManager = new GuiConfigManager(main);
+        Bukkit.getConsoleSender().sendMessage(String.valueOf(main));
     }
 
-    private GuiConfigManager configManager = main.getGuiConfigManager();
+    public void createConfig(String name, boolean replace) {
+        configManager.createConfig(name, replace);
+    }
 
-    public void readConfig(String path) {
+    public List<String> readConfig(String path) {
 
-        Set<String> guiSet = configManager.getCustomConfig("GUI.yml").getKeys(true);
+
+        FileConfiguration guiConfig = configManager.getConfig(path);
         Bukkit.getConsoleSender().sendMessage("GuiBuilder!!!!!");
-        Bukkit.getConsoleSender().sendMessage(String.valueOf(guiSet));
-        return;
-        /*
-                // configManager.getConfig("GUI.yml").get().getConfigurationSection("layout").getKeys(false);
+
+        Set<String> guiSet = guiConfig.getConfigurationSection("layout").getKeys(false);
+
         List<String> guiIDList = new ArrayList<>(guiSet.size());
         guiIDList.addAll(guiSet);
 
@@ -37,12 +43,12 @@ public class GuiBuilder {
 
         for (int i = 0; i < guiIDList.size(); i++) { // Going through all GUIs
 
-            int guiSize = configManager.getConfig("GUI.yml").get().getInt("layout." + guiIDList.get(i) + ".rowCount");
+            int guiSize = guiConfig.getInt("layout." + guiIDList.get(i) + ".rowCount");
             guiSize = guiSize * 9;
-            String guiName = configManager.getConfig("GUI.yml").get().getString("layout." + guiIDList.get(i) + ".name");
+            String guiName = guiConfig.getString("layout." + guiIDList.get(i) + ".name");
             guiList = new ArrayList<>(guiSet.size());
 
-            Set<String> itemSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout." + guiIDList.get(i) + ".slots").getKeys(false);
+            Set<String> itemSet = guiConfig.getConfigurationSection("layout." + guiIDList.get(i) + ".slots").getKeys(false);
             List<String> itemList = new ArrayList<>(itemSet.size());
             itemList.addAll(itemSet);
 
@@ -50,7 +56,7 @@ public class GuiBuilder {
 
             for (int j = 0; j < itemList.size(); j++) { // Going through all configured Items
 
-                itemSet = configManager.getConfig("GUI.yml").get().getConfigurationSection("layout." + guiIDList.get(i) + ".slots." + itemList.get(j)).getKeys(true);
+                itemSet = guiConfig.getConfigurationSection("layout." + guiIDList.get(i) + ".slots." + itemList.get(j)).getKeys(true);
                 List<String> itemList2 = new ArrayList<>(itemSet.size());
                 itemList2.addAll(itemSet);
                 Bukkit.getConsoleSender().sendMessage(String.valueOf(itemList2));
@@ -89,6 +95,6 @@ public class GuiBuilder {
             playerGuis.put(player, inv);
 
             player.openInventory(inv);
-        }*/
+        }
     }
 }

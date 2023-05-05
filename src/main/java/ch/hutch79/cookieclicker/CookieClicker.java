@@ -1,16 +1,13 @@
 package ch.hutch79.cookieclicker;
 
 import ch.hutch79.cookieclicker.commands.TabComplete;
-import ch.hutch79.cookieclicker.gui.GuiConfigManager;
 import ch.hutch79.cookieclicker.listener.Listener;
-import ch.hutch79.cookieclicker.util.ConfigManager;
 import ch.hutch79.cookieclicker.util.DatabaseManager;
 import ch.hutch79.cookieclicker.gui.GuiBuilder;
 import ch.hutch79.cookieclicker.commands.CommandManager;
 import com.jeff_media.updatechecker.UpdateCheckSource;
 import com.jeff_media.updatechecker.UpdateChecker;
 import com.jeff_media.updatechecker.UserAgentBuilder;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -21,22 +18,18 @@ import java.util.Objects;
 public final class CookieClicker extends JavaPlugin {
 
     private static CookieClicker plugin;
-    private ConfigManager configManager;
     private PluginDescriptionFile pdf;
-    private GuiConfigManager guiConfigManager;
-
     private boolean isPlaceholderApiInstalled = false;
 
     @Override
     public void onEnable() {
         plugin = this;
         pdf = this.getDescription();
-        configManager = new ConfigManager(this);
+        //configManager = new ConfigManager(this);
         GuiBuilder guiBuilder = new GuiBuilder();
-
-        guiConfigManager = new GuiConfigManager(this);
-        guiConfigManager.createCustomConfig("GUI.yml");
-
+        guiBuilder.GuiBuilderInit(this);
+        guiBuilder.createConfig("GUI.yml", true);
+        guiBuilder.readConfig("GUI.yml");
 
         Bukkit.getPluginManager().registerEvents(new Listener(), this);
         Objects.requireNonNull(getCommand("cookieclicker")).setExecutor(new CommandManager());
@@ -44,10 +37,6 @@ public final class CookieClicker extends JavaPlugin {
 
         final int SPIGOT_RESOURCE_ID = 105878; // Update checker
         Metrics metrics = new Metrics(this, 16433); // bStats
-
-        // configManager.getConfig("GUI.yml").copyDefaults(true).save();
-        // configManager.getConfig("config.yml").copyDefaults(true).save();
-        // configManager.getConfig("messages.yml").copyDefaults(true).save();
 
         new UpdateChecker(this, UpdateCheckSource.SPIGET, "" + SPIGOT_RESOURCE_ID + "")
                 .setDownloadLink("https://www.spigotmc.org/resources/105878/")
@@ -66,7 +55,7 @@ public final class CookieClicker extends JavaPlugin {
             getLogger().warning("So if you want to provide Feedback for this Version, don't hesitate to do so on GitHub");
             getLogger().warning("and if you find any Bugs, please report them: https://github.com/Hutch79/CookieClicker");
         }
-        guiBuilder.GuiBuilderInit(getPlugin());
+
 
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5======================================================");
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5| §6" + pdf.getName() + " " + pdf.getVersion() + " §bby Hutch79");
@@ -83,8 +72,7 @@ public final class CookieClicker extends JavaPlugin {
             isPlaceholderApiInstalled = true;
         }
         Bukkit.getConsoleSender().sendMessage("§d" + pdf.getName() + " §8> §5| §dLoaded GUI's: §7" + "h");
-        guiBuilder.readConfig("GUI.yml");
-        Bukkit.getConsoleSender().sendMessage("Huiiiii---");
+
         //Bukkit.getConsoleSender().sendMessage(String.valueOf(guiConfigManager.getCustomConfig("test.yml").getKeys(true)));
 
 
@@ -108,13 +96,6 @@ public final class CookieClicker extends JavaPlugin {
     public static CookieClicker getPlugin(){
         return plugin;
     }
-    public ConfigManager getConfigManager(){
-        return configManager;
-    }
-    public GuiConfigManager getGuiConfigManager(){
-        return guiConfigManager;
-    }
-
     public String replacePlaceholders(Player player, String input) {
         if(isPlaceholderApiInstalled) {
             return me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, input);
