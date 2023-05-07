@@ -75,8 +75,8 @@
 
     <repositories>
         <repository>
-            <id>Hutch79-releases</id>
-            <url>https://repo.hutch79.ch/releases</url>
+            <id>Hutch79-beta</id>
+            <url>https://repo.hutch79.ch/beta</url>
         </repository>
         <repository>
             <id>papermc-repo</id>
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>ch.hutch79</groupId>
             <artifactId>GuiBuilder</artifactId>
-            <version>1.0-Beta</version>
+            <version>0.6-Beta</version>
         </dependency>
 
     </dependencies>

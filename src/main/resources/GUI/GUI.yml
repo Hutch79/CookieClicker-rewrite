@@ -10,21 +10,35 @@ clickerItem: # The Item which gets Clicked
 
 layout:
   main: # Main GUI
-    name: "§6CookieClicker"
+    titel: "§6CookieClicker"
     rowCount: 6 # Value from 1 to 6
-    slots:
-      0: # Slot ID
-        item: PLAYER_HEAD # GRASS, STONE, etc.
+    items:
+      head:
+        item_ID: PLAYER_HEAD # GRASS, STONE, etc.
         headValue: player # Player = Player-head of Player how opened the GUI. Any other value is considered as Value. Only needed if Item is PLAYER_HEAD. Default is None.
         name: "%player_name%" # Item name with PlaceholderAPI support
         lore: | # Item lore with PlaceholderAPI support. Default is None.
           Cookies: %cookieclicker_cookie_balance%
           CPC: %cookieclicker_cpc%
-        action: none # none, shop_gui, main_gui, clicker.
         enchanted: false # Default false
         count: 1 # Default 1
 
-      1:
-        item: BLACK_STAINED_GLASS_PANE
-        name: ""
-        action: none
+      placeholder:
+        item_ID: BLACK_STAINED_GLASS_PANE
+        name: " "
+
+      Air:
+        item_ID: AIR
+
+    slots:
+      Clicker:
+        item: Air
+        slots: [2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25, 26, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 43, 44, 47, 48, 49, 50, 51, 52, 53]
+
+      placeholder:
+        item: placeholder
+        slots: [1, 10, 19, 28, 37, 46]
+
+      Head:
+        item: head
+        slots: 0

@@ -25,11 +25,11 @@ public final class CookieClicker extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         pdf = this.getDescription();
-        //configManager = new ConfigManager(this);
         GuiBuilder guiBuilder = new GuiBuilder();
         guiBuilder.GuiBuilderInit(this);
-        guiBuilder.createConfig("GUI.yml", true);
-        guiBuilder.readConfig("GUI.yml");
+        guiBuilder.createConfig("GUI/GUI.yml", true);
+        guiBuilder.readConfig("GUI/GUI.yml");
+
 
         Bukkit.getPluginManager().registerEvents(new Listener(), this);
         Objects.requireNonNull(getCommand("cookieclicker")).setExecutor(new CommandManager());
