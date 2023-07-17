@@ -79,8 +79,8 @@
             <url>https://repo.hutch79.ch/beta</url>
         </repository>
         <repository>
-            <id>papermc-repo</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
             <id>jeff-media-public</id>
@@ -94,8 +94,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.destroystokyo.paper</groupId>
-            <artifactId>paper-api</artifactId>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
             <version>1.13-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>ch.hutch79</groupId>
             <artifactId>GuiBuilder</artifactId>
-            <version>0.6-Beta</version>
+            <version>0.35-Beta</version>
         </dependency>
 
     </dependencies>

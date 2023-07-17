@@ -10,7 +10,10 @@ import com.jeff_media.updatechecker.UpdateChecker;
 import com.jeff_media.updatechecker.UserAgentBuilder;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
@@ -25,10 +28,13 @@ public final class CookieClicker extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         pdf = this.getDescription();
-        GuiBuilder guiBuilder = new GuiBuilder();
-        guiBuilder.GuiBuilderInit(this);
-        guiBuilder.createConfig("GUI/GUI.yml", true);
-        guiBuilder.readConfig("GUI/GUI.yml");
+        GuiBuilder guiBuilder = new GuiBuilder(this);
+        guiBuilder.createGui("main", 9);
+        ItemStack itemStack = new ItemStack(Material.STONE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName("Holla, this is §6%player_name% - %localtime_time%");
+        itemStack.setItemMeta(itemMeta);
+        guiBuilder.setItem("main", 3, itemStack, "Test Tag im Main");
 
 
         Bukkit.getPluginManager().registerEvents(new Listener(), this);

@@ -10,6 +10,7 @@ public class Listener implements org.bukkit.event.Listener {
 
     private final ArrayList<String> guis = new ArrayList<String>();
 
+
     public Listener() {
 
         guis.add("CookieClicker");
@@ -34,11 +35,12 @@ public class Listener implements org.bukkit.event.Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!guis.contains(event.getView().getTitle())) {
-            return;
-        }
+//        if (!guis.contains(event.getView().getTitle())) {
+//            return;
+//        }
+
         OnInventoryClick.execute(event);
-        event.setCancelled(true);
+//        event.setCancelled(true);
 
 
     }
